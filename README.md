@@ -40,7 +40,3 @@ The open source version of dataloader is available from: https://github.com/forc
 
 This should produce the output file in the data/ directory and if the debug log was enabled, the trace file in the status/ directory. 
 
-Enjoy!
-
--Senthil
-
