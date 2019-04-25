@@ -1,0 +1,20 @@
+Force.com のための Apex データローダ (Linux/Mac コマンドラインバージョン)
+
+このプロジェクトでは、Linux または Mac のコマンドラインから Apex データローダーを実行するための設定とスクリプトが不足しています。Salesforce.com によって提供される Apex データローダは Windows 専用ですが、JDK をサポートする任意のプラットフォーム上で実行できる Java jar ファイルです。スクリプトは、コマンドラインからデータローダを実行するためだけのもので、Windows およびオープンソースの Mac バージョンで利用可能な GUI を提供していません。
+
+
+1.	「dataloader-30.0.0-uber」ファイルを「dataloader/ directory」にコピーします。
+2.	パスワードを暗号化するための秘密キーを生成します。
+$ bin/encrypt.sh -g <some-random-seed-text> 
+3.	上記の手順2の出力を 「conf/private」 にコピーします (テキストを置き換える)
+4.	生成された秘密キーを使用して、salesforce パスワード (必要に応じて + セキュリティトークン) を暗号化します
+$ bin/encrypt.sh -e "password+security token" conf/private.key
+
+5.	上記の手順3の出力を、「sfdc.password」 トークンの 「conf/config」 プロパティファイルにコピーします。
+6.	「sfdc.username」 と 「sfdc.endpoint」 トークン値を使用して、conf/config プロパティファイルを更新します。
+7.	エクスポートジョブごとに、「conf/config」 プロパティファイルに新しいコードを追加します。
+8.	1ジョブを実行するコマンド
+$ bin/process.sh csvAccountExtractProcess
+
+
+
